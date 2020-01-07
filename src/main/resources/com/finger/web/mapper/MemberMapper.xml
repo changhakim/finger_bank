@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finger.web.mapper.MemberMapper">
+
+<resultMap id="result" type="hashmap">
+  <id property="mid" column="mid" />
+  <result property="password" column="password"/>
+  <result property="address" column="address"/>
+  <result property="name" column="name"/>
+  <result property="phone" column="phone"/>
+  <result property="mail" column="mail"/>
+  <result property="account" column="account"/>
+  <result property="birth" column="birth"/>
+  
+  
+<!-- artnum,content,artdate, artphoto, mid, extension; -->
+</resultMap>
+
+<insert id="insertMember" parameterType="com.finger.web.domain.Member">
+	INSERT INTO MEMBERS(mid, password,address, name,phone, mail, account,birth ) 
+	VALUES(#{mid}, #{password},#{address},#{name},#{phone}, #{mail}, #{account}, #{birth})
+</insert>
+</mapper>
