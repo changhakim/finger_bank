@@ -16,4 +16,11 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public Member existsMember(Member m) {
+		// TODO Auto-generated method stub
+		System.out.println(m.toString());
+		return memMap.existsMember(m);
+	}
+
 }

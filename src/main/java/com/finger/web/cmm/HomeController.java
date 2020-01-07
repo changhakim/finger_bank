@@ -43,5 +43,11 @@ public class HomeController {
 		
 		return "index";
 	}
+	@RequestMapping(value="/home")
+	public String loginaccess(Locale locale,Model model) {
+		logger.info("=========index진입======");
+		
+		return"home";
+	}
 	
 }

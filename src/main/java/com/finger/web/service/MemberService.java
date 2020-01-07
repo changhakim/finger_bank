@@ -7,4 +7,5 @@ import com.finger.web.domain.Member;
 @Component
 public interface MemberService {
 	public void registMember(Member mem);
+	public Member existsMember(Member m);
 }

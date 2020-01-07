@@ -22,4 +22,10 @@
 	INSERT INTO MEMBERS(mid, password,address, name,phone, mail, account,birth ) 
 	VALUES(#{mid}, #{password},#{address},#{name},#{phone}, #{mail}, #{account}, #{birth})
 </insert>
+<select id="existsMember" resultType="com.finger.web.domain.Member"
+						parameterType="com.finger.web.domain.Member">
+        SELECT mid,password,account
+        FROM MEMBERS
+        WHERE MID LIKE #{mid} AND PASSWORD LIKE #{password}
+</select>
 </mapper>

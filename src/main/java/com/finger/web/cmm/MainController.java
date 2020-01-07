@@ -19,17 +19,31 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	@Autowired
 	HashMap<String, Object> map;
-	
-	  @Autowired MemberServiceImpl memService;
+	@Autowired 
+	MemberServiceImpl memService;
+	@Autowired
+	Member mem;
 	 
 	
-	@PostMapping("/catess/{cate}")
-	public Map<?, ?> cateAlllist(@PathVariable String cate, @RequestBody Member param) {
-		logger.info("=======  ProductController prosomelist:상품카테고리별 전체조회  진입 ======");
+	@PostMapping("/login/{auth}")
+	public Map<?, ?> cateAlllist(@PathVariable String auth, @RequestBody Member param) {
+		logger.info("=======  로그인진입 ======");
 		map.clear();
+		
 		System.out.println(param.toString());
-		memService.registMember(param);
-		map.put("list", "어이");
+		mem = memService.existsMember(param);
+		
+		
+		  if(mem == null){
+			  map.put("mid","idNull"); 
+		  }else{
+		  System.out.println(mem.getMid());
+		  System.out.println(mem.getAccount()); 
+		  map.put("member",mem);
+		  map.put("mid",mem.getMid());
+		  }
+		 
+		 
 		return map;
 	}
 }

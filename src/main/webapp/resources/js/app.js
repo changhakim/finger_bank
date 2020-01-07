@@ -2,26 +2,30 @@
 var app  = app || {};
 
 app = (()=>{
-	let aa
 	
 	let init=x=>{
-		onCreate();
+		app.$.init(x);
 	}
 	let onCreate = ()=>{
 		setContentView();
 	}
 	let setContentView=()=>{
-		let ac = {'mid':'aa', 'password':'bb', 'address':'cc','name':'dd',
-				'phone':'ff', 'mail':'gg','account':'','birth':'adf'}
-		$('#aa').click(function(){
+		$('#loginbtn').click(function(){
+			let ac = {'mid':$('#login').val(), 'password':$('#password').val()}
 			$.ajax({
-				url:'/web/catess/aa',
+				url:'/web/login/auth',
 				type:'post',
 				data:JSON.stringify(ac),
 				dataType:'json',
 				contentType:'application/json; charset=UTF-8;',
 				success: d=>{
-					alert(d.list);
+					if(d.mid == 'idNull'){
+						alert('아이디가 존재하지않습니다.');
+					}else{
+						sessionStorage.setItem('acc',d.member.account);
+						location.assign($.ctx()+'/home');
+						
+					}
 				},
 				error : e => {
 						
@@ -31,5 +35,17 @@ app = (()=>{
 			
 		})
 	}
-	return {init : init}
-})()
+	return {init : init,onCreate:onCreate}
+	
+})();
+app.$={
+		init:x=>{
+			$.getScript(x+'/resources/js/router.js',
+			()=>{
+				$.extend(new Session(x))
+				app.onCreate(); 
+				
+			});
+			
+		}
+}
